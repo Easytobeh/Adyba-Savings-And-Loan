@@ -5,7 +5,9 @@ using System.Text;
 
 namespace EntityLayer
 {
+
     public class Tenor
+
     {
         public int Id { get; set; }
         public DateTime Days { get; set; }
@@ -13,9 +15,11 @@ namespace EntityLayer
         public DateTime Month { get; set; }
         public DateTime Year { get; set; }
 
+
         //Navigation properties
 
         public Loan Loan { get; set; }
         public int LoanId { get; set; }
+
     }
 }
