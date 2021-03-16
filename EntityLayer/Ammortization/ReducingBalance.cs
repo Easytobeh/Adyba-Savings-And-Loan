@@ -1,22 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace EntityLayer.LoansBaseClass
+namespace EntityLayer
 {
-    class LoanAmmortization
+    public class ReducingBalance
     {
-        /********DISBURSE LOAN************/
-       // public int AccountId { get; set; }
+        public int Id { get; set; }
         public DateTime DisbursementDate { get; set; }
         public DateTime FirstRepaymentDate { get; set; }
         public decimal Payments { get; set; }
+        public DateTime Days { get; set; }
+        public DateTime Weeks { get; set; }
+        public DateTime Month { get; set; }
+        public DateTime Year { get; set; }
 
-        //********** LOAN *********//
-       // public int Id { get; set; }
-        //public int CustomerId { get; set; }
+       
         public float Tenor { get; set; }
 
         public int NumberOfPayment { get; set; }
@@ -32,8 +31,11 @@ namespace EntityLayer.LoansBaseClass
         //public LoanType LoanType { get; set; }
         public PaymentMethod PaymentMethod { get; set; }
         //public CustomerProfile CustomerProfile { get; set; }
-       // public int CustomerProfileId { get; set; }
+        // public int CustomerProfileId { get; set; }
 
-        //******REPAY LOAN******************//
+      
     }
+
+}
+   
 }
