@@ -1,4 +1,6 @@
-﻿using EntityLayer.DataAccess;
+﻿using EntityLayer.AdminDetails;
+using EntityLayer.DataAccess;
+using EntityLayer.IAdminRepositorys;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -9,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace EntityLayer.AdminRepository
 {
-    public class AdminRepositoryImplementation
+    public class AdminRepositoryImplementation :IAdminRepository
     {
 
         private readonly ApplicationDbContext _appDbContext;
@@ -25,17 +27,17 @@ namespace EntityLayer.AdminRepository
         }
 
         //READING A SINGLE DATA FROM THE DB
-        public async Task<SavingsAccount> GetOneSavingsAccount(int id)
+        public async Task<Admin> GetOneAdmin(int id)
         {
-            return await _appDbContext.SavingsAccounts.FirstOrDefaultAsync(x => x.Id == id);
+            return await _appDbContext.Admins.FirstOrDefaultAsync(x => x.id == id);
         }
 
-        public async Task<List<SavingsAccount>> GetAllSavingsAccount()
+        public async Task<List<Admin>> GetAllAdmin()
         {
-            List<SavingsAccount> result = new List<SavingsAccount>();
+            List<Admin> result = new List<Admin>();
             try
             {
-                result = await _appDbContext.SavingsAccounts.ToListAsync();
+                result = await _appDbContext.Admins.ToListAsync();
             }
             catch (SqlException)
             {
