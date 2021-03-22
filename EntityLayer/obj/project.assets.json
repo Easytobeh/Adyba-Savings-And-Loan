@@ -5740,11 +5740,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\OloruntobiJunaid\\Documents\\Adyba\\Backend\\master\\EntityLayer\\EntityLayer.csproj",
+      "projectUniqueName": "C:\\Users\\OloruntobiJunaid\\Documents\\Adyba\\Backend\\EntityLayer\\EntityLayer.csproj",
       "projectName": "EntityLayer",
-      "projectPath": "C:\\Users\\OloruntobiJunaid\\Documents\\Adyba\\Backend\\master\\EntityLayer\\EntityLayer.csproj",
+      "projectPath": "C:\\Users\\OloruntobiJunaid\\Documents\\Adyba\\Backend\\EntityLayer\\EntityLayer.csproj",
       "packagesPath": "C:\\Users\\OloruntobiJunaid\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\OloruntobiJunaid\\Documents\\Adyba\\Backend\\master\\EntityLayer\\obj\\",
+      "outputPath": "C:\\Users\\OloruntobiJunaid\\Documents\\Adyba\\Backend\\EntityLayer\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Microsoft\\Xamarin\\NuGet\\"
@@ -5821,5 +5821,13 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problem reading the cache file C:\\Users\\OloruntobiJunaid\\Documents\\Adyba\\Backend\\EntityLayer\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
+    }
+  ]
 }

@@ -31,12 +31,22 @@ namespace AdyMfb.Controllers
             return Ok(Admin);
         }
 
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetOneAdmin(int id)
+        {
+
+            var Admin = await _repository.GetOneAdmin(id);
+            return Ok(Admin);
+        }
+
 
         [HttpPost]
-        public async Task<IActionResult> UpdateAdmin()
+        public async Task<IActionResult> UpdateAdmin(Admin newAdminData)
         {
-            var Admin = await _repository.GetAllAdmin();
-            return Ok(Admin);
+            await _repository.Add(newAdminData);
+            await _repository.SaveAllChangesAsync();
+           
+            return Ok(newAdminData);
         }
 
         // PUT api/<ValuesController>/5
