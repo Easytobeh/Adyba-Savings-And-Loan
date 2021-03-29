@@ -1,18 +1,27 @@
 using EntityLayer.AdminRepository;
-using EntityLayer.Authentication.Common;
-using EntityLayer.Authentication.IService;
-using EntityLayer.Authentication.Service;
 using EntityLayer.DataAccess;
 using EntityLayer.IAdminRepositorys;
 using EntityLayer.SavingsRepository;
 using EntityLayer.SavingsRepository.ISavingsRepositorys;
+using EntityLayer.SignUp.Configuration;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace AdyMfb
 {
@@ -22,7 +31,6 @@ namespace AdyMfb
         {
             Configuration = configuration;
         }
-
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -38,9 +46,6 @@ namespace AdyMfb
             services.AddControllers().AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling
             = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
-            services.AddScoped<ILoginService, LoginService>();
-            services.AddScoped<IMailService, MailService>();
-
             //Add service for Junaid Personal Database connection
             //services.AddDbContext<ApplicationDbContext>(options =>
            // options.UseSqlServer(Configuration.GetConnectionString("JunaidConnection")));
@@ -49,12 +54,38 @@ namespace AdyMfb
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddScoped<ISavingsRepository, SavingsRepositoryImplementation>();
+
             services.AddScoped<IAdminRepository, AdminRepositoryImplementation>();
 
-            //Global.ConnectionString = Configuration.GetConnectionString("JunaidConnection");
-            Global.ConnectionString = Configuration.GetConnectionString("DefaultConnection");
 
-            Global.DomainName = Configuration["DomainName"];
+            services.Configure<JwtConfig>(Configuration.GetSection("JwtConfig"));
+
+            services.AddAuthentication(opt =>
+            {
+                opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                opt.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+                opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+
+
+            }).AddJwtBearer(jwt =>
+            {
+                var key = Encoding.ASCII.GetBytes(Configuration["JwtConfig:Secret"]);
+                jwt.SaveToken = true;
+                jwt.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    ValidateLifetime = true,
+                    RequireExpirationTime = false
+                };
+
+            });
+
+            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                
+               .AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
 
             services.AddSwaggerGen(c =>
           {
@@ -79,7 +110,9 @@ namespace AdyMfb
             
             app.UseHttpsRedirection();
 
+            app.UseCors("AllowEverthing");
             app.UseRouting();
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
