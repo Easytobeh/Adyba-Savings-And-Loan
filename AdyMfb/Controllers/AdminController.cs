@@ -25,8 +25,6 @@ namespace AdyMfb.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAdmin()
         {
-
-
             var Admin = await _repository.GetAllAdmin();
             return Ok(Admin);
         }

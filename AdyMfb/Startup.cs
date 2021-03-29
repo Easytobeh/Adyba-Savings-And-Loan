@@ -30,10 +30,7 @@ namespace AdyMfb
         //ioc container(inversion of control)
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddCors(c =>
-            //{
-            //    c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin());
-            //});
+            //Configure Services for CORS
 
             services.AddCors(options => options.AddPolicy("AllowEverthing", builder => builder.AllowAnyOrigin()
             .AllowAnyMethod().AllowAnyHeader()));
@@ -45,17 +42,18 @@ namespace AdyMfb
             services.AddScoped<IMailService, MailService>();
 
             //Add service for Junaid Personal Database connection
-            services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("JunaidConnection")));
-
             //services.AddDbContext<ApplicationDbContext>(options =>
-            //options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+           // options.UseSqlServer(Configuration.GetConnectionString("JunaidConnection")));
+
+            services.AddDbContext<ApplicationDbContext>(options =>
+            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddScoped<ISavingsRepository, SavingsRepositoryImplementation>();
             services.AddScoped<IAdminRepository, AdminRepositoryImplementation>();
 
-            Global.ConnectionString = Configuration.GetConnectionString("JunaidConnection");
-            //Global.ConnectionString = Configuration.GetConnectionString("DefaultConnection");
+            //Global.ConnectionString = Configuration.GetConnectionString("JunaidConnection");
+            Global.ConnectionString = Configuration.GetConnectionString("DefaultConnection");
+
             Global.DomainName = Configuration["DomainName"];
 
             services.AddSwaggerGen(c =>
@@ -69,6 +67,7 @@ namespace AdyMfb
         {
             //Inject CORS into a container
             //app.UseCors(options => options.AllowAnyOrigin());
+            app.UseCors("AllowEverthing");
 
             if (env.IsDevelopment())
             {
@@ -77,8 +76,7 @@ namespace AdyMfb
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "AdyMfb v1"));
             }
 
-            app.UseCors("AllowEverthing");
-
+            
             app.UseHttpsRedirection();
 
             app.UseRouting();
