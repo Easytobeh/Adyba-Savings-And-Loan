@@ -4,8 +4,13 @@
     {
         public int id { get; set; }
         public int StaffId { get; set; }
+<<<<<<< HEAD
 
         public byte[]? ProfilePicture { get; set; }
+=======
+        
+        public byte? ProfilePicture { get; set; }
+>>>>>>> 739e9637555c9aa1c46f1925834bce97ee9a46d1
         public string UserName { get; set; }
         public string Email { get; set; }
 

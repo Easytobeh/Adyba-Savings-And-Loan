@@ -5970,7 +5970,11 @@
   "projectFileDependencyGroups": {
     "net5.0": [
       "EntityLayer >= 1.0.0",
+<<<<<<< HEAD
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 5.0.4",
+=======
+      "Microsoft.AspNetCore.Identity.UI >= 5.0.3",
+>>>>>>> 739e9637555c9aa1c46f1925834bce97ee9a46d1
       "Microsoft.EntityFrameworkCore.Design >= 5.0.3",
       "Microsoft.VisualStudio.Azure.Containers.Tools.Targets >= 1.10.9",
       "Swashbuckle.AspNetCore >= 5.6.3"
@@ -6024,9 +6028,15 @@
       "net5.0": {
         "targetAlias": "net5.0",
         "dependencies": {
+<<<<<<< HEAD
           "Microsoft.AspNetCore.Authentication.JwtBearer": {
             "target": "Package",
             "version": "[5.0.4, )"
+=======
+          "Microsoft.AspNetCore.Identity.UI": {
+            "target": "Package",
+            "version": "[5.0.3, )"
+>>>>>>> 739e9637555c9aa1c46f1925834bce97ee9a46d1
           },
           "Microsoft.EntityFrameworkCore.Design": {
             "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
