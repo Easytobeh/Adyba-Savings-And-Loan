@@ -42,7 +42,7 @@ namespace AdyMfb.Controllers
         {
             await _repository.Add(newAdminData);
             await _repository.SaveAllChangesAsync();
-            return Ok(newAdminData);
+            return Ok();
         }
 
         // PUT api/<ValuesController>/5

@@ -42,15 +42,19 @@ namespace AdyMfb
         public void ConfigureServices(IServiceCollection services)
         {
 
-
             services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+          options.UseSqlServer(Configuration.GetConnectionString("JunaidConnection")));
+
+            //services.AddDbContext<ApplicationDbContext>(options =>
+            //options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddScoped<ISavingsRepository, SavingsRepositoryImplementation>();
 
             services.AddScoped<IAdminRepository, AdminRepositoryImplementation>();
-
-
+            //Services for Cross Origin Resource Sharing
+            services.AddCors(options => options.AddPolicy("AllowEverthing", builder => builder.AllowAnyOrigin()
+                                                                                              .AllowAnyMethod()
+                                                                                              .AllowAnyHeader()));
             services.Configure<JwtConfig>(Configuration.GetSection("JwtConfig"));
 
             services.AddAuthentication(opt =>

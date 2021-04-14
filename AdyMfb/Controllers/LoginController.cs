@@ -29,8 +29,6 @@ namespace AdyMfb.Controllers
             _jwtConfig = optionsMonitor;
         }
 
-
-
         // GET: api/<LoginController>
         [Route("Register")]
         [HttpPost]
