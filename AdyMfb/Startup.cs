@@ -1,5 +1,8 @@
 using AdyMfb.Controllers;
 using EntityLayer.AdminRepository;
+using EntityLayer.AutoMapperProfile;
+using EntityLayer.CustomerRepository;
+using EntityLayer.CustomerRepositoryServices;
 using EntityLayer.DataAccess;
 using EntityLayer.IAdminRepositorys;
 using EntityLayer.SavingsRepository;
@@ -21,6 +24,7 @@ using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -43,18 +47,20 @@ namespace AdyMfb
         {
 
             services.AddDbContext<ApplicationDbContext>(options =>
-          options.UseSqlServer(Configuration.GetConnectionString("JunaidConnection")));
+            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddAutoMapper(typeof(CustomerMapper));
+            services.AddAutoMapper(typeof(SavingsAccountMapper));
+            services.AddAutoMapper(typeof(LoanMapper));
+            services.AddAutoMapper(typeof(DepositMapper));
+            
 
-            //services.AddDbContext<ApplicationDbContext>(options =>
-            //options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddScoped<ISavingsRepository, SavingsRepositoryImplementation>();
+            services.AddScoped<ISavingsRepository, SavingsRepo>();
+            services.AddScoped<ICustomerRepository, CustomerService>();
 
             services.AddScoped<IAdminRepository, AdminRepositoryImplementation>();
-            //Services for Cross Origin Resource Sharing
-            services.AddCors(options => options.AddPolicy("AllowEverthing", builder => builder.AllowAnyOrigin()
-                                                                                              .AllowAnyMethod()
-                                                                                              .AllowAnyHeader()));
+          
+
             services.Configure<JwtConfig>(Configuration.GetSection("JwtConfig"));
 
             services.AddAuthentication(opt =>
