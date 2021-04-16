@@ -1,6 +1,6 @@
 ﻿namespace EntityLayer.DataAccess
 {
-    public class DepositeFunds
-    {
-    }
+    //public class DepositeFunds
+    //{
+    //}
 }

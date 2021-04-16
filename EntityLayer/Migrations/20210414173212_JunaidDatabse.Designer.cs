@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EntityLayer.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210408150730_danielMigration")]
-    partial class danielMigration
+    [Migration("20210414173212_JunaidDatabse")]
+    partial class JunaidDatabse
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -647,9 +647,7 @@ namespace EntityLayer.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("AccountNumber")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("AccountOwnerID")
                         .HasColumnType("int");
@@ -666,9 +664,6 @@ namespace EntityLayer.Migrations
 
                     b.Property<decimal>("InitialBal")
                         .HasColumnType("decimal(18,6)");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 

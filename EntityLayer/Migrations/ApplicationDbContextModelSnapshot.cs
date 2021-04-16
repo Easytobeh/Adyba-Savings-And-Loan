@@ -244,11 +244,6 @@ namespace EntityLayer.Migrations
                     b.ToTable("CustomerProfiles");
                 });
 
-            modelBuilder.Entity("EntityLayer.DataAccess.DepositeFunds", b =>
-                {
-                    b.ToTable("DepositeFunds");
-                });
-
             modelBuilder.Entity("EntityLayer.DebitCardIssuance", b =>
                 {
                     b.Property<int>("Id")

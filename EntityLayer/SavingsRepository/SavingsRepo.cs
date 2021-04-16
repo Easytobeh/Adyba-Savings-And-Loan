@@ -153,12 +153,13 @@ namespace EntityLayer.SavingsRepository
             return savingsAccount;
 
         }
+           
 
-        public async Task<DepositDto> SaveMoney(DepositDto deposit)
-        {
-           var saveMoney = _mapper.Map<DepositeFunds>(deposit);
-           await _appDbContext.DepositeFunds.AddAsync(saveMoney);
-            return deposit;
-        }
+        //public async Task<DepositDto> SaveMoney(DepositDto deposit)
+        //{
+        //   var saveMoney = _mapper.Map<DepositeFunds>(deposit);
+        //   await _appDbContext.DepositeFunds.AddAsync(saveMoney);
+        //    return deposit;
+        //}
     }
 }

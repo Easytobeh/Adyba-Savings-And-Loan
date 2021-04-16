@@ -33,12 +33,12 @@ namespace AdyMfb.Controllers
         }
 
 
-        [HttpPost("Deposit")]
-        public async Task<ActionResult<DepositDto>> DepositFunds([FromBody] DepositDto deposit )
-        {
-           await _repository.SaveMoney(deposit);
-            return Ok(deposit);
-        }
+        //[HttpPost("Deposit")]
+        //public async Task<ActionResult<DepositDto>> DepositFunds([FromBody] DepositDto deposit )
+        //{
+        //   await _repository.SaveMoney(deposit);
+        //    return Ok(deposit);
+        //}
 
 
         
